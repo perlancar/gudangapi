@@ -1,0 +1,22 @@
+Data::ModeMerge
+Data::Dump
+File::Slurp
+Log::Any
+Log::Any::App
+Module::List
+Moo
+Sub::Spec::HTTP::Server
+
+# for clients
+#WWW::GudangAPI
+
+# for API module: tax/id/npwp
+Business::ID::NPWP
+
+# for API module: number/phrase/id
+Lingua::ID::Nums2Words
+Lingua::ID::Words2Nums
+
+# for API module: finance/currency/id/bca
+LWP
+

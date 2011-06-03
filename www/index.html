@@ -1,0 +1,76 @@
+<title>GudangAPI</title>
+<h1>GudangAPI</h1>
+
+<p>Gudangnya API gratis bagi programer Indonesia. Dokumentasi detil menyusul,
+tapi beberapa demo singkat:
+
+<h3>Kurs</h3>
+<big><pre>$ curl 'http://api.gudangapi.com/v1/finance/currency/id/bca/get_bca_exchange_rate?from=<font color=#994411>USD</font>&to=<font color=#994411>IDR</font></b>'
+<font color=#447744>[200, "OK",
+ {"buy": 8425,
+  "sell": 8675,
+  "average": 8650,
+  "spread": 250,
+  "mtime_str": "20-Mei-2011 10:14 WIB",
+ }
+]</font>
+
+# baca petunjuk penggunaan API ini di: <a href="http://api.gudangapi.com/v1/finance/currency/id/bca/get_bca_exchange_rate;h">http://api.gudangapi.com/v1/finance/currency/id/bca/get_bca_exchange_rate;h</a>
+</pre></big>
+
+<h3>Terbilang</h3>
+<big><pre>$ curl 'http://api.gudangapi.com/v1/number/phrase/id/terbilang?num=<b><font color=#994411>1023.4</font></b>'
+<font color=#447744>[200, "OK", "seribu dua puluh tiga koma empat"]</font>
+
+# baca petunjuk penggunaan API ini di: <a href="http://api.gudangapi.com/v1/number/phrase/id/terbilang;h">http://api.gudangapi.com/v1/number/phrase/id/terbilang;h</a>
+</pre></big>
+
+<h3>Dari Terbilang</h3>
+<big><pre>$ curl 'http://api.gudangapi.com/v1/number/phrase/id/dari_terbilang?phrase=<b><font color=#994411>seribu+dua+puluh+tiga+koma+empat</font></b>'
+<font color=#447744>[200, "OK", 1023.4]</font>
+
+# baca petunjuk penggunaan API ini di: <a href="http://api.gudangapi.com/v1/number/phrase/id/dari_terbilang;h">http://api.gudangapi.com/v1/number/phrase/id/dari_terbilang;h</a>
+</pre></big>
+
+<h3>Validasi NPWP pajak</h3>
+<big><pre>$ curl 'http://api.gudangapi.com/v1/tax/id/npwp/validate_npwp?npwp=<b><font color=#994411>01.957.716.2-000.000</font></b>'
+<font color=#447744>[200, "OK"]</font>
+
+$ curl 'http://api.gudangapi.com/v1/tax/id/npwp/validate_npwp?npwp=<b><font color=#994411>01.957.716.<span style="background: #eeaaaa">7</span>-000.000</font></b>'
+<font color=#447744>[400,"Invalid NPWP: wrong check digit"]</font>
+
+# baca petunjuk penggunaan API ini di: <a href="http://api.gudangapi.com/v1/tax/id/npwp/validate_npwp;h">http://api.gudangapi.com/v1/tax/id/npwp/validate_npwp;h</a>
+</pre></big>
+
+<h3>Parsing NPWP pajak</h3>
+<big><pre>$ curl 'http://api.gudangapi.com/v1/tax/id/npwp/parse_npwp?npwp=<b><font color=#994411>01.957.716.2-000.000</font></b>'
+<font color=#447744>[
+ 200,
+ "OK",
+ {"pretty":"01.957.716.2-000.000",
+   "serial":"957716",
+   "branch_code":"000",
+   "local_tax_office_code":"000",
+   "check_digit":"2",
+   "taxpayer_code":"01",
+   "normalized":"01.957.716.2-000.000"
+ }
+]</font>
+# baca petunjuk penggunaan API ini di: <a href="http://api.gudangapi.com/v1/tax/id/npwp/parse_npwp;h">http://api.gudangapi.com/v1/tax/id/npwp/parse_npwp;h</a>
+</pre></big>
+
+<h3>Lainnya</h3>
+
+<p>Tersedia banyak API lain: validasi <u>KTP</u>, <u>SIM</u>, <u>nomor
+telepon</u>. <u>Kurs mata uang</u>, <u>saham</u>, <u>konversi IP/negara</u>,
+<u><b>internet banking</b></u>, <u>kalender hari libur nasional</u>.
+Daftar <u>negara</u>, <u>propinsi</u>, <u>kecamatan</u>. <u>Kamus
+bahasa</u>. Dan masih banyak lagi.
+
+<h3>Kontak</h3>
+
+<p>Pertanyaan? Komentar? Silakan ajukan ke milis id-php [at] yahoogroups.com.
+
+<hr>
+<p>Penjaga gudang: Steven Haryanto, steven [at] masterweb.net.
+

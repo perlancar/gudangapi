@@ -1,0 +1,46 @@
+#!/usr/bin/perl
+
+use 5.010;
+use strict;
+use warnings;
+use FindBin '$Bin'; use lib "$Bin/../lib/perl";
+
+use Log::Any::App '$log';
+
+die "Usage: $0 <start|stop|status|restart>\n"
+    if @ARGV < 1 || $ARGV[0] !~ /^(start|stop|status|restart)$/;
+
+require GudangAPI::APIServer;
+
+my $ip = "119.235.18.18";
+my $nodaemon = $ARGV[1] && $ARGV[1] eq '--nodaemon';
+
+my $server = GudangAPI::APIServer->new(
+    name                    => 'gudangapi-apid',
+    daemonize               => $nodaemon ? 0 : 1,
+    start_servers           => $nodaemon ? 0 : 10,
+    module_prefix           => 'GudangAPI::API',
+    ssl_key_file            => "$Bin/../ssl/apid.key",
+    ssl_cert_file           => "$Bin/../ssl/apid.crt",
+
+    error_log_path          => "/var/log/gudangapi/apid-error.log",
+    access_log_path         => "/var/log/gudangapi/apid-access.log",
+    pid_path                => "/var/run/gudangapi/apid.pid",
+    http_port               => 80,
+    https_port              => 443,
+    https_bind_host         => $ip,
+    http_bind_host          => $ip,
+);
+
+if ($ARGV[0] eq 'start') {
+    $server->run;
+} elsif ($ARGV[0] eq 'stop') {
+    $server->stop;
+} elsif ($ARGV[0] eq 'restart') {
+    $server->restart;
+} elsif ($ARGV[0] eq 'status') {
+    my $pid = $server->_daemon->check_pidfile;
+    say $pid ? "Running (PID $pid)" : "Not running";
+}
+
+1;
